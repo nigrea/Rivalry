@@ -28,7 +28,7 @@
 				$email = $_POST ['inputEmail'];
 				$password = $_POST ['inputPassword'];
 				
-				header('Location: jimmy");
+				header('Location: jimmy');
 			}
 			
 			?>
