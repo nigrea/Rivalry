@@ -4,12 +4,12 @@ include 'header.php';
 ?>
 
 <div class="jumbotron">
-	<h1><?php print $_SESSION['li_username']?></h1>
+	<h1><?php print $_SESSION['main_summoner_name']?></h1>
 	
 	<?php 
-	
-	$summoner = get_summoner_by_name ( $_SESSION['li_username'] );
-	$lower_case_name = strtolower($_SESSION['li_username']);
+	print $_SESSION ['user_id'];
+	$summoner = get_summoner_by_name ( $_SESSION['main_summoner_name'] );
+	$lower_case_name = strtolower($_SESSION['main_summoner_name']);
 	
 	?>
 	

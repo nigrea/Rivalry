@@ -74,6 +74,10 @@ function delete_row($table_name, $condition){
 	return $sql_delete;	
 }
 
+function login(){
+	
+}
+
 // function for getting users name from user id
 // syntax for use: $username = get_username("user_id");
 function get_username($user_id){
@@ -83,12 +87,18 @@ function get_username($user_id){
 	return $user_name;  //returns the username for the user.
 }
 
-function get_real_name($user_id){
+function get_summoner($user_id){
 	include 'config.php';
-	$real = get_table($config_user, "user_id ='".$user_id."'");
-	$real_name = $real[0]['real_name'];
-	return $real_name;  //returns the realname for the user.
+	$summoner = get_table($config_summoner, "user_id ='".$user_id."'");
+	return $summoner;  //returns the summoner
 }
+
+function get_main_summoner($user_id){
+	include 'config.php';
+	$summoner = get_table($config_summoner, "user_id ='".$user_id."' AND main = 1");
+	return $summoner;  //returns the summoner
+}
+
 
 function get_email($user_id){
 	include 'config.php';

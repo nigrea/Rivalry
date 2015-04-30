@@ -15,17 +15,21 @@ if (isset ( $_POST ['submit'] )) {
 	$password = $_POST ['inputPassword'];
 	$leagueName = $_POST ['leagueName'];		
 		
-	add_row($config_user, "email, password, league_name", "'$email','$password','$leagueName'");
+	add_row($config_user, "email, password", "'$email','$password'");
 	
 	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
 	
+	
+	
 	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
+		$_SESSION ['user_id'] = $login_arr [0] ['id'];
 		$_SESSION ['user_loggedin'] = "1";
-		$_SESSION ['li_username'] = @$login_arr [0] ['league_name'];
+		$summoner = get_main_summoner($_SESSION ['user_id']);
+		$_SESSION ['main_summoner_name'] = $summoner [0] ['name'];
+		$_SESSION ['main_summoner_api_id'] = $summoner [0] ['api_id'];
 		if (@$_SESSION ['user_loggedin']) {
 			header ( "Location: profile.php" );
 			die ( "Redirecting to: profile.php" );
-		}
 	}
 }
 ?>
