@@ -8,29 +8,25 @@ $_SESSION ['loggedin'] = false;
 include 'db_mysql.php';
 include 'config.php';
 include 'func_lib.php';
+include 'api_func_lib.php';
 
 if (isset ( $_POST ['submit'] )) {
 	$email = $_POST ['inputEmail'];
 	$password = $_POST ['inputPassword'];
-	$leagueName = $_POST ['leagueName'];
+	$leagueName = $_POST ['leagueName'];		
+		
+	add_row($config_user, "email, password, league_name", "'$email','$password','$leagueName'");
 	
-	$json = file_get_contents($config_summoner_by_name.$leagueName.$config_url_api_key);
-	$obj = json_decode($json);
+	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
 	
-	var_dump($obj);
-	
-// 	add_row($config_user, "email, password, league_name", "'$email','$password','$leagueName'");
-	
-// 	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
-	
-// 	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
-// 		$_SESSION ['user_loggedin'] = "1";
-// 		$_SESSION ['li_username'] = @$login_arr [0] ['league_name'];
-// 		if (@$_SESSION ['user_loggedin']) {
-// 			header ( "Location: profile.php" );
-// 			die ( "Redirecting to: profile.php" );
-// 		}
-// 	}
+	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
+		$_SESSION ['user_loggedin'] = "1";
+		$_SESSION ['li_username'] = @$login_arr [0] ['league_name'];
+		if (@$_SESSION ['user_loggedin']) {
+			header ( "Location: profile.php" );
+			die ( "Redirecting to: profile.php" );
+		}
+	}
 }
 ?>
 <!DOCTYPE html>

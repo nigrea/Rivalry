@@ -11,6 +11,7 @@
 		include 'db_mysql.php';
 		include 'config.php';
 		include 'func_lib.php';
+		include 'api_func_lib.php';
 
 		if(!@$_SESSION['user_loggedin']){
 			header("Location: login.php");
