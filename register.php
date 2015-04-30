@@ -12,16 +12,25 @@ include 'func_lib.php';
 if (isset ( $_POST ['submit'] )) {
 	$email = $_POST ['inputEmail'];
 	$password = $_POST ['inputPassword'];
-	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
+	$leagueName = $_POST ['leagueName'];
 	
-	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
-		$_SESSION ['user_loggedin'] = "1";
-		$_SESSION ['li_username'] = @$login_arr [0] ['league_name'];
-		if (@$_SESSION ['user_loggedin']) {
-			header ( "Location: profile.php" );
-			die ( "Redirecting to: profile.php" );
-		}
-	}
+	$json = file_get_contents($config_summoner_by_name.$leagueName.$config_url_api_key);
+	$obj = json_decode($json);
+	
+	var_dump($obj);
+	
+// 	add_row($config_user, "email, password, league_name", "'$email','$password','$leagueName'");
+	
+// 	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
+	
+// 	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
+// 		$_SESSION ['user_loggedin'] = "1";
+// 		$_SESSION ['li_username'] = @$login_arr [0] ['league_name'];
+// 		if (@$_SESSION ['user_loggedin']) {
+// 			header ( "Location: profile.php" );
+// 			die ( "Redirecting to: profile.php" );
+// 		}
+// 	}
 }
 ?>
 <!DOCTYPE html>
@@ -50,26 +59,29 @@ if (isset ( $_POST ['submit'] )) {
 
 	<div class="container">
 
-		<form class="form-signin" role="form" method="post" action="login.php">
+		<form class="form-signin" role="form" method="post"
+			action="register.php">
 			<h2 class="form-signin-heading">Please sign init</h2>
-			<label for="inputEmail" class="sr-only">Email address</label> <input
+			<label for="inputEmail" class="sr-only">Email address</label> 
+			<input
 				type="email" id="inputEmail" name="inputEmail" class="form-control"
-				placeholder="Email address" required autofocus> <label
-				for="inputPassword" class="sr-only">Password</label> <input
+				placeholder="Email address" required autofocus> 
+			<label for="inputPassword" class="sr-only">Password</label> 
+			<input
 				type="password" id="inputPassword" name="inputPassword"
-				class="form-control" placeholder="Password" required>
+				class="form-control" placeholder="Password" required> 
+			<label for="leagueName" class="sr-only">League Name</label> 
+			<input
+				type="text" id="leagueName" name="leagueName" class="form-control"
+				placeholder="League Name" required>
 			<div class="checkbox">
 				<label> <input type="checkbox" value="remember-me"> Remember me
 				</label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				name="submit">Sign in</button>
-		</form>
-
-		<form class="form-signin" action="register.php">
-			<button class="btn btn-lg btn-primary btn-block" type="submit"
 				name="submit">Register</button>
 		</form>
+
 
 	</div>
 	<!-- /container -->
