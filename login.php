@@ -1,24 +1,30 @@
 
 <?php
+@session_destroy ();
+session_unset ();
+session_start ();
+$_SESSION ['loggedin'] = false;
 
-@session_destroy(); 
-session_unset();
-session_start();
-$_SESSION['loggedin'] = false;
+include 'db_mysql.php';
+include 'config.php';
+include 'func_lib.php';
+
 
 if (isset ( $_POST ['submit'] )) {
 	$email = $_POST ['inputEmail'];
-	$password = $_POST ['inputPassword'];
-	$_SESSION['user_loggedin'] = "1";
-	$_SESSION['li_username'] = $email;
+	$password = $_POST ['inputPassword'];	
+	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
 	
-	if(@$_SESSION['user_loggedin']){
-		header("Location: profile.php");
-		die("Redirecting to: profile.php");
+	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
+		$_SESSION ['user_loggedin'] = "1";
+		$_SESSION ['li_username'] = @$login_arr [0]['league_name'];
+		if (@$_SESSION ['user_loggedin']) {
+			header ( "Location: profile.php" );
+			die ( "Redirecting to: profile.php" );
+		}
 	}
-	
-} 
-	?>
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,8 +57,8 @@ if (isset ( $_POST ['submit'] )) {
 				type="email" id="inputEmail" name="inputEmail" class="form-control"
 				placeholder="Email address" required autofocus> <label
 				for="inputPassword" class="sr-only">Password</label> <input
-				type="password" id="inputPassword" name="inputPassword" class="form-control"
-				placeholder="Password" required>
+				type="password" id="inputPassword" name="inputPassword"
+				class="form-control" placeholder="Password" required>
 			<div class="checkbox">
 				<label> <input type="checkbox" value="remember-me"> Remember me
 				</label>
@@ -70,4 +76,4 @@ if (isset ( $_POST ['submit'] )) {
 </body>
 </html>
 
-    
+
