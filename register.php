@@ -13,23 +13,33 @@ include 'api_func_lib.php';
 if (isset ( $_POST ['submit'] )) {
 	$email = $_POST ['inputEmail'];
 	$password = $_POST ['inputPassword'];
-	$leagueName = $_POST ['leagueName'];		
-		
-	add_row($config_user, "email, password", "'$email','$password'");
+	$leagueName = $_POST ['leagueName'];
+	
+	add_row ( $config_user, "email, password", "'$email','$password'" );
 	
 	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
 	
-	
-	
 	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
-		$_SESSION ['user_id'] = $login_arr [0] ['id'];
+		$user_id = $login_arr [0] ['id'];
+		
+		$_SESSION ['user_id'] = $user_id;
 		$_SESSION ['user_loggedin'] = "1";
-		$summoner = get_main_summoner($_SESSION ['user_id']);
-		$_SESSION ['main_summoner_name'] = $summoner [0] ['name'];
-		$_SESSION ['main_summoner_api_id'] = $summoner [0] ['api_id'];
+		
+		
+		$summoner = get_summoner_by_name ( $leagueName );
+		$lower_case_name = strtolower ( $leagueName );
+		
+		$main_summoner_api_id = $summoner->$lower_case_name->id;
+		
+		$_SESSION ['main_summoner_name'] = $lower_case_name;
+		$_SESSION ['main_summoner_api_id'] = $main_summoner_api_id;
+		
+		add_row ( $config_summoner, "name, api_id, user_id, main", "'$lower_case_name','$main_summoner_api_id', '$user_id' , 1" );
+		
 		if (@$_SESSION ['user_loggedin']) {
 			header ( "Location: profile.php" );
 			die ( "Redirecting to: profile.php" );
+		}
 	}
 }
 ?>
@@ -62,16 +72,13 @@ if (isset ( $_POST ['submit'] )) {
 		<form class="form-signin" role="form" method="post"
 			action="register.php">
 			<h2 class="form-signin-heading">Please sign init</h2>
-			<label for="inputEmail" class="sr-only">Email address</label> 
-			<input
+			<label for="inputEmail" class="sr-only">Email address</label> <input
 				type="email" id="inputEmail" name="inputEmail" class="form-control"
-				placeholder="Email address" required autofocus> 
-			<label for="inputPassword" class="sr-only">Password</label> 
-			<input
+				placeholder="Email address" required autofocus> <label
+				for="inputPassword" class="sr-only">Password</label> <input
 				type="password" id="inputPassword" name="inputPassword"
-				class="form-control" placeholder="Password" required> 
-			<label for="leagueName" class="sr-only">League Name</label> 
-			<input
+				class="form-control" placeholder="Password" required> <label
+				for="leagueName" class="sr-only">League Name</label> <input
 				type="text" id="leagueName" name="leagueName" class="form-control"
 				placeholder="League Name" required>
 			<div class="checkbox">
@@ -91,5 +98,4 @@ if (isset ( $_POST ['submit'] )) {
 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
-
 

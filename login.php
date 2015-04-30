@@ -16,7 +16,7 @@ if (isset ( $_POST ['submit'] )) {
 	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
 		$_SESSION ['user_id'] = $login_arr [0] ['id'];
 		$_SESSION ['user_loggedin'] = "1";
-		$summoner = get_main_summoner($login_arr [0] ['id'];);
+		$summoner = get_main_summoner($login_arr [0] ['id']);
 		$_SESSION ['main_summoner_name'] = $summoner [0] ['name'];
 		$_SESSION ['main_summoner_api_id'] = $summoner [0] ['api_id'];
 		if (@$_SESSION ['user_loggedin']) {
