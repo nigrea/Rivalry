@@ -1,3 +1,15 @@
+
+<?php
+			if (isset ( $_GET ['submit'] )) {
+				$email = $_POST ['inputEmail'];
+				$password = $_POST ['inputPassword'];
+				
+				header("Location: secret.php"); 
+            	die("Redirecting to: secret.php"); 
+				
+			} 
+				
+				?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,26 +29,15 @@
 <!-- Custom styles for this template -->
 <link href="css/signin.css" rel="stylesheet">
 
-
-
 </head>
 
 <body>
 
-  	<?php
-			if (isset ( $_GET ['submit'] )) {
-				$email = $_POST ['inputEmail'];
-				$password = $_POST ['inputPassword'];
-				
-				header('Location: jimmy');
-			}
-			
-			?>
-  
-    <div class="container">
 
-		<form class="form-signin">
-			<h2 class="form-signin-heading">Please sign in</h2>
+	<div class="container">
+
+		<form class="form-signin" role="form" method="get" action="test.php">
+			<h2 class="form-signin-heading">Please sign init</h2>
 			<label for="inputEmail" class="sr-only">Email address</label> <input
 				type="email" id="inputEmail" class="form-control"
 				placeholder="Email address" required autofocus> <label
@@ -47,7 +48,7 @@
 				<label> <input type="checkbox" value="remember-me"> Remember me
 				</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+			<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Sign
 				in</button>
 		</form>
 
@@ -59,3 +60,6 @@
 	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+
+  
+    
