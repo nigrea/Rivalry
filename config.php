@@ -16,7 +16,11 @@ $config_user 			= "user";
 
 // API urls
 
-$config_summoner_by_name = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/";
+$config_api_summoner_by_name = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/";
 $config_url_api_key = "?api_key=52e4e3eb-5dd4-4d67-9f6f-df9cb2d78d15";
+
+// Asset urls
+
+$config_image_summoner_icon = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/profileicon/";
 
 ?>
