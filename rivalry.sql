@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2015 at 12:32 AM
+-- Generation Time: May 01, 2015 at 01:06 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `summoner` (
   `main` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `summoner`
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `summoner` (
 INSERT INTO `summoner` (`id`, `name`, `api_id`, `user_id`, `main`) VALUES
 (1, 'McBoobyBoobys', 0, 3, 1),
 (2, 'nigrea', 0, 1, 1),
-(3, 'alf', 0, 5, 1);
+(4, 'kizzo', 24570013, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(100) NOT NULL,
   `password` char(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='for testing and prototyping' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='for testing and prototyping' AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `user`
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `email`, `password`) VALUES
 (1, 'fizzer@gmail.com', '123'),
 (3, 'elly@boobs.com', 'boobs'),
-(5, 'alf@alf.alf', 'alf');
+(9, 'kizzo@gmail.com', '123');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
