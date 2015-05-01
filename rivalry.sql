@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2015 at 01:06 AM
+-- Generation Time: May 01, 2015 at 07:05 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,54 @@ SET time_zone = "+00:00";
 --
 -- Database: `rivalry`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `challange`
+--
+
+CREATE TABLE IF NOT EXISTS `challange` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_one_id` int(11) NOT NULL,
+  `user_two_id` int(11) NOT NULL,
+  `accepted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `challange`
+--
+
+INSERT INTO `challange` (`id`, `user_one_id`, `user_two_id`, `accepted`) VALUES
+(1, 9, 1, 1),
+(2, 9, 1, 1),
+(3, 9, 1, 1),
+(4, 1, 9, 1),
+(6, 9, 1, 1),
+(7, 1, 9, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rivalry`
+--
+
+CREATE TABLE IF NOT EXISTS `rivalry` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_one_id` int(11) NOT NULL,
+  `user_two_id` int(11) NOT NULL,
+  `start_date` timestamp NOT NULL,
+  `end_date` timestamp NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `rivalry`
+--
+
+INSERT INTO `rivalry` (`id`, `user_one_id`, `user_two_id`, `start_date`, `end_date`) VALUES
+(3, 1, 9, '2015-05-01 17:04:23', '2015-05-15 17:04:23');
 
 -- --------------------------------------------------------
 

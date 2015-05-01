@@ -11,7 +11,9 @@ $config_api_key = "52e4e3eb-5dd4-4d67-9f6f-df9cb2d78d15";
 
 // General tables
 $config_user 			= "user";
-$config_summoner 			= "summoner";
+$config_summoner 		= "summoner";
+$config_challange 		= "challange";
+$config_rivalry			= "rivalry";
 
 // Binding tables
 

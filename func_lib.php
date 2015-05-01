@@ -99,6 +99,25 @@ function get_main_summoner($user_id){
 	return $summoner;  //returns the summoner
 }
 
+function get_challange($challange_id){
+	include 'config.php';
+	$challange = get_table($config_challange, "id ='".$challange_id."'");
+	return $challange;  //returns the challange
+}
+
+function get_rivalry($rivalry_id){	
+	include 'config.php';
+	$rivalry = get_table($config_rivalry, "id ='".$rivalry_id."'");
+	return $rivalry;  //returns the rivalry
+}
+
+function get_user_by_summoner($summoner_name){
+	include 'config.php';
+	$summoner = get_table($config_summoner, "name ='".$summoner_name."' AND main = 1");
+	$id = $summoner[0]['user_id'];
+	$user = get_table($config_user, "id ='".$id."'");
+	return $user;
+}
 
 function get_email($user_id){
 	include 'config.php';
