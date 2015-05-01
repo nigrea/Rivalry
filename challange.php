@@ -31,7 +31,8 @@ if (isset ( $_POST ['accept'] )) {
 
 $received_challanges = get_table ( $config_challange, "user_two_id ='" . $id_one . "' AND accepted = 0" );
 $send_challanges = get_table ( $config_challange, "user_one_id ='" . $id_one . "' AND accepted = 0" );
-
+ 
+$rivalrys = array_merge(get_table($config_rivalry, "user_one_id ='" . $id_one . "'"),get_table($config_rivalry, "user_two_id ='" . $id_one . "'"));
 ?>
 
 <div class="jumbotron">
@@ -80,6 +81,7 @@ $send_challanges = get_table ( $config_challange, "user_one_id ='" . $id_one . "
 	<div>
 		<?php var_dump ( $received_challanges );?>
 		<?php var_dump ( $send_challanges );?>
+		<?php var_dump($rivalrys);?>
 	</div>
 
 </div>
