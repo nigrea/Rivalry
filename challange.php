@@ -79,8 +79,11 @@ $rivalrys = array_merge(get_table($config_rivalry, "user_one_id ='" . $id_one . 
 	</div>
 
 	<div>
+		<h3> Received Challanges </h3>
 		<?php var_dump ( $received_challanges );?>
+		<h3> Send Challanges </h3>
 		<?php var_dump ( $send_challanges );?>
+		<h3> Rivalrys </h3>
 		<?php var_dump($rivalrys);?>
 	</div>
 
