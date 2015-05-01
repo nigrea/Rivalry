@@ -34,9 +34,29 @@ function update_user_stats($user_id){
 	$matches = get_table($config_match, 'user_id = "'.$user_id.'"');
 	$matches_saved = count($matches);
 	$date = $matches[$matches_saved-1]['date'];
-
-	$json = file_get_contents($config_api_summoner_by_name.$name.$config_url_api_key);
-	https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/24570013/recent?api_key=52e4e3eb-5dd4-4d67-9f6f-df9cb2d78d15
+	$save_game_id = $matches[$matches_saved-1]['game_id'];
+	
+	$json = file_get_contents($config_api_recent_games.$summoner[0]['api_id']."/recent?".$config_url_api_key);
+	$obj = json_decode($json);
+	
+	$games = $obj -> games;
+	
+	$games = array_reverse($games); 
+	
+	foreach ( $games as $game ){
+		$new_date = $game -> createDate;
+		$new_date = $new_date/1000;
+		
+		
+		
+		if(strtotime($date) < $new_date && $save_game_id != $game -> gameId){
+			
+			
+			
+			add_row($config_match, "match_id, date, win, user_id", "'$match_id', '$new_date' , '$win', '$user_id'");
+		}
+		
+	}	
 }
 
 ?>

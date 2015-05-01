@@ -20,6 +20,7 @@ $config_match			= "match";
 
 // API urls
 
+$config_api_recent_games = "https://na.api.pvp.net/api/lol/na/v1.3/game/by-summoner/";
 $config_api_summoner_by_name = "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/";
 $config_url_api_key = "api_key=52e4e3eb-5dd4-4d67-9f6f-df9cb2d78d15";
 $config_api_rankstats = "https://na.api.pvp.net/api/lol/na/v1.3/stats/by-summoner/";
