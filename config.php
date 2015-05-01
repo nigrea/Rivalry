@@ -14,6 +14,7 @@ $config_user 			= "user";
 $config_summoner 		= "summoner";
 $config_challange 		= "challange";
 $config_rivalry			= "rivalry";
+$config_match			= "match";
 
 // Binding tables
 
