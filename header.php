@@ -41,6 +41,7 @@
             <ul class="nav navbar-nav">
               <li><a href="profile.php">Profile</a></li>
               <li><a href="challange.php">Challange</a></li>
+              <li><a href="highelo.php">Top Tier Players</a></li>
               <li><a href="#">Contact</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
