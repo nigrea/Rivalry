@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+update_user_stats($_SESSION['user_id']);
 
 ?>
 
