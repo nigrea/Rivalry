@@ -15,6 +15,7 @@ $config_summoner 		= "summoner";
 $config_challange 		= "challange";
 $config_rivalry			= "rivalry";
 $config_match			= "matches";
+$config_raw_match_stats = "raw_match_stats";
 
 // Binding tables
 

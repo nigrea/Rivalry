@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2015 at 12:31 PM
+-- Generation Time: May 03, 2015 at 12:24 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -55,49 +55,70 @@ INSERT INTO `challange` (`id`, `user_one_id`, `user_two_id`, `accepted`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `matches` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `match_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `date` timestamp NOT NULL,
   `win` tinyint(1) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `champion_id` int(11) NOT NULL,
+  `game_mode` varchar(20) NOT NULL,
+  `game_type` varchar(20) NOT NULL,
+  `ip_earned` int(11) NOT NULL,
+  `sub_type` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `matches`
 --
 
-INSERT INTO `matches` (`id`, `match_id`, `date`, `win`, `user_id`) VALUES
-(27, 1800833158, '2015-04-21 05:59:48', 0, 9),
-(28, 1802086894, '2015-04-23 02:31:36', 1, 9),
-(29, 1802087373, '2015-04-23 02:59:06', 1, 9),
-(30, 1802088247, '2015-04-23 03:39:54', 0, 9),
-(31, 1803117255, '2015-04-23 23:47:39', 0, 9),
-(32, 1803131211, '2015-04-24 01:04:06', 0, 9),
-(33, 1805798609, '2015-04-26 23:03:47', 0, 9),
-(34, 1806773356, '2015-04-27 20:50:59', 1, 9),
-(35, 1807651072, '2015-04-28 21:38:56', 1, 9),
-(36, 1808765569, '2015-04-29 23:36:10', 1, 9),
-(37, 1793230169, '2015-04-12 18:10:39', 1, 1),
-(38, 1792319326, '2015-04-12 19:28:12', 0, 1),
-(39, 1792945575, '2015-04-12 19:56:46', 0, 1),
-(40, 1794588912, '2015-04-14 20:44:34', 0, 1),
-(41, 1794589426, '2015-04-14 21:31:43', 1, 1),
-(42, 1805934990, '2015-04-26 22:20:34', 1, 1),
-(43, 1805798609, '2015-04-26 23:03:47', 0, 1),
-(44, 1806773356, '2015-04-27 20:50:59', 1, 1),
-(45, 1807651072, '2015-04-28 21:38:56', 1, 1),
-(46, 1808765569, '2015-04-29 23:36:10', 1, 1),
-(47, 1803385328, '2015-04-24 05:21:31', 1, 10),
-(48, 1803139145, '2015-04-24 06:36:47', 0, 10),
-(49, 1803198861, '2015-04-24 15:49:59', 1, 10),
-(50, 1803911279, '2015-04-25 01:59:03', 1, 10),
-(51, 1803912481, '2015-04-25 02:37:33', 1, 10),
-(52, 1805934990, '2015-04-26 22:20:34', 1, 10),
-(53, 1805798609, '2015-04-26 23:03:47', 0, 10),
-(54, 1806773356, '2015-04-27 20:50:59', 1, 10),
-(55, 1808632303, '2015-04-29 22:26:15', 1, 10),
-(56, 1808765569, '2015-04-29 23:36:10', 1, 10);
+INSERT INTO `matches` (`id`, `date`, `win`, `user_id`, `champion_id`, `game_mode`, `game_type`, `ip_earned`, `sub_type`) VALUES
+(1794589426, '2015-04-14 21:31:43', 1, 1, 25, 'CLASSIC', 'MATCHED_GAME', 251, 'CAP_5x5'),
+(1805798609, '2015-04-26 23:03:47', 0, 1, 12, 'CLASSIC', 'MATCHED_GAME', 64, 'CAP_5x5'),
+(1805934990, '2015-04-26 22:20:34', 1, 1, 111, 'CLASSIC', 'MATCHED_GAME', 256, 'CAP_5x5'),
+(1806773356, '2015-04-27 20:50:59', 1, 1, 143, 'CLASSIC', 'MATCHED_GAME', 193, 'BOT'),
+(1807651072, '2015-04-28 21:38:56', 1, 1, 25, 'CLASSIC', 'MATCHED_GAME', 251, 'CAP_5x5'),
+(1808765569, '2015-04-29 23:36:10', 1, 1, 13, 'CLASSIC', 'MATCHED_GAME', 265, 'CAP_5x5'),
+(1811275750, '2015-05-02 18:33:36', 0, 1, 25, 'CLASSIC', 'MATCHED_GAME', 71, 'CAP_5x5'),
+(1811372688, '2015-05-02 17:46:16', 1, 1, 13, 'CLASSIC', 'MATCHED_GAME', 226, 'CAP_5x5'),
+(1811634188, '2015-05-02 21:27:42', 1, 1, 238, 'CLASSIC', 'MATCHED_GAME', 41, 'BOT'),
+(1811656326, '2015-05-02 22:08:49', 1, 1, 14, 'CLASSIC', 'MATCHED_GAME', 46, 'BOT');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `raw_match_stats`
+--
+
+CREATE TABLE IF NOT EXISTS `raw_match_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `match_id` int(11) NOT NULL,
+  `assists` int(11) NOT NULL,
+  `gold_earned` int(11) NOT NULL,
+  `kills` int(11) NOT NULL,
+  `total_damage_to_champions` int(11) NOT NULL,
+  `minions_killed` int(11) NOT NULL,
+  `deaths` int(11) NOT NULL,
+  `ward_placed` int(11) NOT NULL,
+  `ward_killed` int(11) NOT NULL,
+  `summoner_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `raw_match_stats`
+--
+
+INSERT INTO `raw_match_stats` (`id`, `match_id`, `assists`, `gold_earned`, `kills`, `total_damage_to_champions`, `minions_killed`, `deaths`, `ward_placed`, `ward_killed`, `summoner_id`) VALUES
+(1, 1794589426, 20, 13803, 7, 30212, 175, 7, 7, 1, 418830),
+(2, 1805934990, 16, 10701, 3, 11083, 46, 6, 22, 3, 418830),
+(3, 1805798609, 7, 7058, 1, 6893, 41, 9, 18, 0, 418830),
+(4, 1806773356, 17, 10617, 12, 28089, 80, 2, 0, 0, 418830),
+(5, 1807651072, 9, 11687, 5, 20122, 215, 1, 8, 1, 418830),
+(6, 1808765569, 19, 19318, 17, 51607, 267, 5, 10, 0, 418830),
+(7, 1811372688, 3, 6919, 4, 8797, 113, 1, 2, 0, 418830),
+(8, 1811275750, 14, 10012, 3, 19843, 44, 8, 27, 4, 418830),
+(9, 1811634188, 8, 12692, 27, 37011, 122, 1, 0, 0, 418830),
+(10, 1811656326, 6, 11923, 33, 42730, 134, 0, 3, 0, 418830);
 
 -- --------------------------------------------------------
 
