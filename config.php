@@ -27,7 +27,7 @@ $config_api_rankstats = "https://na.api.pvp.net/api/lol/na/v1.3/stats/by-summone
 $config_api_season = "/ranked?season=SEASON2015";
 $config_api_statsummary = "/summary?season=SEASON2015";
 $config_api_challengertier = "https://na.api.pvp.net/api/lol/na/v2.5/league/challenger?type=RANKED_SOLO_5x5&";
-
+$config_api_leagueentry = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/";
 // Asset urls
 
 $config_image_summoner_icon = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/profileicon/";
