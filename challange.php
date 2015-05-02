@@ -77,6 +77,33 @@ $rivalrys = array_merge(get_table($config_rivalry, "user_one_id ='" . $id_one . 
 			</tbody>
 		</table>
 	</div>
+	
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				foreach ( $rivalrys as $rivalry ) {
+					?>
+					<tr>
+					<td><?php print $rivalry['id']; ?></td>
+					<td><form class="form-signin" role="form" method="post"
+							action="rivalry.php<?php print "?id=".$rivalry['id'];?>">
+							<button class="btn btn-lg btn-primary btn-block" type="submit"
+								name="accept">Challange</button>
+						</form></td>
+					</tr>
+					<?php
+				}
+				?>										
+			</tbody>
+		</table>
+	</div>
 
 	<div>
 		<h3> Received Challanges </h3>

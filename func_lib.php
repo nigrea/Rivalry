@@ -82,8 +82,8 @@ function login(){
 // syntax for use: $username = get_username("user_id");
 function get_username($user_id){
 	include 'config.php';
-	$user = get_table($config_user, "user_id ='".$user_id."'");
-	$user_name = $user[0]['user_name'];
+	$user = get_table($config_user, "id ='".$user_id."'");
+	$user_name = $user[0]['name'];
 	return $user_name;  //returns the username for the user.
 }
 
@@ -136,19 +136,9 @@ function get_userid($user_name){
 	return $user_id;
 }
 
-function get_userbio($user_id){
-	include 'config.php';
-	$bio = get_table($config_user, "user_id ='".$user_id."'");
-	$user_bio = $bio[0]['user_bio'];
-	return $user_bio;
-}
 
-function get_useravatar($user_id){
-	include 'config.php';
-	$avatar = get_table($config_user, "user_id ='".$user_id."'");
-	$user_avatar = $avatar[0]['user_avatar'];
-	return $user_avatar;
-}
+
+
 
 function validate_password($user_id, $password){
 	include 'config.php';
