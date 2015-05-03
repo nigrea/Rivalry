@@ -149,7 +149,7 @@ function get_match_points($match){
 	$result = array();
 	
 	if($match ['win'] == 1){
-		$result["win"] = 100;
+		$result["win"] = 75;
 	} else {
 		$result["win"] = -75;
 	}		
@@ -158,12 +158,17 @@ function get_match_points($match){
 	$result ["assists"]  = (($match ['assists'])*3)/$match_duration;
 	$result ["deaths"]  = (($match ['deaths'])*(-5))/$match_duration;
 	
-	$result ["minions"]  = ($match ['minions_killed'])/(20/$match_duration);
+	$result ["minions"]  = ($match ['minions_killed'])/(10*$match_duration);
 	
-	$result ["damage_to_champions"]  = ($match ['total_damage_to_champions'])/(1000/$match_duration);
+	$result ["damage_to_champions"]  = ($match ['total_damage_to_champions'])/(1000*$match_duration);
 	
 	$result ["ward_placed"]  = (($match ['ward_placed'])*2)/$match_duration;
 	$result ["ward_killed"]  = (($match ['ward_killed'])*2)/$match_duration;
+	
+	$result ["total"] = array_sum ($result);
+	
+	var_dump($result);
+	
 	
 	return $result;
 	
