@@ -31,6 +31,13 @@ function get_leagueentry($id){
 	return $obj;
 }
 
+function get_champion($id){
+	include 'config.php';
+	$json = file_get_contents($config_api_champion.$config_url_api_key);
+	$obj = json_decode($json);
+	return get_object_vars($obj->data);
+}
+
 function save_match($game, $user_id, $summoner_id) {
 	include 'config.php';
 	$date = $game->createDate;
@@ -166,9 +173,6 @@ function get_match_points($match){
 	$result ["ward_killed"]  = (($match ['ward_killed'])*2)/$match_duration;
 	
 	$result ["total"] = array_sum ($result);
-	
-	var_dump($result);
-	
 	
 	return $result;
 	

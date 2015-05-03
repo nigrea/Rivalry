@@ -16,6 +16,7 @@ $config_challange 		= "challange";
 $config_rivalry			= "rivalry";
 $config_match			= "matches";
 $config_raw_match_stats = "raw_match_stats";
+$config_champion		= "champion";
 
 // Binding tables
 
@@ -29,6 +30,7 @@ $config_api_season = "/ranked?season=SEASON2015";
 $config_api_statsummary = "/summary?season=SEASON2015";
 $config_api_challengertier = "https://na.api.pvp.net/api/lol/na/v2.5/league/challenger?type=RANKED_SOLO_5x5&";
 $config_api_leagueentry = "https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/";
+$config_api_champion = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?";
 // Asset urls
 
 $config_image_summoner_icon = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/profileicon/";
