@@ -44,7 +44,11 @@ function save_match($game, $user_id, $summoner_id) {
 	$ip_earned = $game->ipEarned;
 	$sub_type = $game->subType;
 
-	add_row ( $config_match, "id, date, win, user_id, champion_id, game_mode, game_type, ip_earned, sub_type", "'$match_id', '$date' , '$win', '$user_id' , '$champion_id', '$game_mode' , '$game_type', '$ip_earned' , '$sub_type'" );
+	$matches = get_table($config_match, "id ='".$match_id."'");
+	
+	if(empty($matches)){
+		add_row ( $config_match, "id, date, win, game_mode, game_type, ip_earned, sub_type", "'$match_id', '$date' , '$win', '$game_mode' , '$game_type', '$ip_earned' , '$sub_type'" );
+	}
 	
 	if(isset ($game->stats->assists)){
 		$assists = $game->stats->assists;
@@ -95,14 +99,16 @@ function save_match($game, $user_id, $summoner_id) {
 	}
 	
 	
-	add_row( $config_raw_match_stats, "match_id, assists, gold_earned, kills, total_damage_to_champions, minions_killed, deaths, ward_placed, ward_killed, summoner_id", "'$match_id', '$assists', '$gold_earned', '$kills', '$total_damage_to_champions', '$firstblood', '$minions_killed', '$deaths', '$ward_placed', '$ward_killed', '$summoner_id'");
+	
+	add_row( $config_raw_match_stats, "match_id, assists, gold_earned, kills, total_damage_to_champions, minions_killed, deaths, ward_placed, ward_killed, summoner_id, champion_id", 
+			"'$match_id', '$assists', '$gold_earned', '$kills', '$total_damage_to_champions', '$minions_killed', '$deaths', '$ward_placed', '$ward_killed', '$summoner_id', '$champion_id'");
 	
 }
 
 function update_user_stats($user_id) {
 	include 'config.php';
 	$summoner = get_summoner ( $user_id );
-	$matches = get_table ( $config_match, "user_id = $user_id" );
+	$matches = get_table_with_inner_join($config_match, $config_raw_match_stats, $config_match.".id = ".$config_raw_match_stats.".match_id and ".$config_raw_match_stats.".summoner_id = ".$summoner[0]['api_id']);
 	$matches_saved = count ( $matches );
 	
 	$json = file_get_contents ( $config_api_recent_games.$summoner [0] ['api_id']."/recent?".$config_url_api_key );

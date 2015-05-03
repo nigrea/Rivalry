@@ -44,6 +44,19 @@ function get_entire_table($table_name){
 	return $return_data;
 }
 
+function get_table_with_inner_join($left_table, $right_table, $postOn){
+	include 'config.php';
+	
+	$query_table = "SELECT * FROM $left_table INNER JOIN $right_table ON $postOn";
+
+	$sql_table = mysql_query($query_table) OR die(mysql_error());
+	
+	$return_data = mysql_fetch_full_result_array($sql_table);
+		
+	return $return_data; //since the data you return is in an arrey you need to manually get the desired row and data.
+				//example of this: $user_name = $temp_user_table[0]['user_name']; 
+} 
+
 //this function updates a row with the desired, name, name of the columms you want the desired data to appear ($set). where the condition for the desired row is ($condition)
 // example of syntax for use: update_table($config_user, 'user_password = "'.$password.'"', 'user_id = "'.$user_id.'"');
 function update_table($table_name, $set, $condition){
@@ -74,18 +87,8 @@ function delete_row($table_name, $condition){
 	return $sql_delete;	
 }
 
-function login(){
-	
-}
-
 // function for getting users name from user id
 // syntax for use: $username = get_username("user_id");
-function get_username($user_id){
-	include 'config.php';
-	$user = get_table($config_user, "id ='".$user_id."'");
-	$user_name = $user[0]['name'];
-	return $user_name;  //returns the username for the user.
-}
 
 function get_summoner($user_id){
 	include 'config.php';
