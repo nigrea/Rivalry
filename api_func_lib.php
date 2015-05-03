@@ -98,10 +98,14 @@ function save_match($game, $user_id, $summoner_id) {
 		$ward_killed = 0;
 	}
 	
+	if(isset ($game->stats->timePlayed)){
+		$time_played = $game->stats->timePlayed;
+	}else{
+		$time_played = 0;
+	}
 	
-	
-	add_row( $config_raw_match_stats, "match_id, assists, gold_earned, kills, total_damage_to_champions, minions_killed, deaths, ward_placed, ward_killed, summoner_id, champion_id , win", 
-			"'$match_id', '$assists', '$gold_earned', '$kills', '$total_damage_to_champions', '$minions_killed', '$deaths', '$ward_placed', '$ward_killed', '$summoner_id', '$champion_id', '$win'");
+	add_row( $config_raw_match_stats, "match_id, assists, gold_earned, kills, total_damage_to_champions, minions_killed, deaths, ward_placed, ward_killed, summoner_id, champion_id , win, time_played", 
+			"'$match_id', '$assists', '$gold_earned', '$kills', '$total_damage_to_champions', '$minions_killed', '$deaths', '$ward_placed', '$ward_killed', '$summoner_id', '$champion_id', '$win' , '$time_played'");
 	
 }
 

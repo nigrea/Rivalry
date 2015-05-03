@@ -11,8 +11,11 @@ $user_two_id = $rivalry [0] ['user_two_id'];
 $summoner_one = get_main_summoner ( $user_one_id );
 $summoner_two = get_main_summoner ( $user_two_id );
 
-$matches_one = get_table ( $config_match, "user_id ='" . $user_one_id . "'" );
-$matches_two = get_table ( $config_match, "user_id ='" . $user_two_id . "'" );
+
+$matches_one = get_table_with_inner_join($config_match, $config_raw_match_stats, $config_match.".id = ".$config_raw_match_stats.".match_id and ".$config_raw_match_stats.".summoner_id = ".$summoner_one[0]['api_id']);
+$matches_two = get_table_with_inner_join($config_match, $config_raw_match_stats, $config_match.".id = ".$config_raw_match_stats.".match_id and ".$config_raw_match_stats.".summoner_id = ".$summoner_two[0]['api_id']);
+
+var_dump($matches_one);
 
 $user_one_points = 0;
 $user_two_points = 0;
