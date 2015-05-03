@@ -88,6 +88,10 @@ $rivalry = get_rivalry ( $id );
 $user_one_id = $rivalry [0] ['user_one_id'];
 $user_two_id = $rivalry [0] ['user_two_id'];
 
+update_user_stats ( $user_one_id );
+update_user_stats ( $user_two_id );
+
+
 $summoner_one = get_main_summoner ( $user_one_id );
 $summoner_two = get_main_summoner ( $user_two_id );
 
