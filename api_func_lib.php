@@ -141,4 +141,32 @@ function update_user_stats($user_id) {
 	
 }
 
+
+function get_match_points($match){
+		
+	$match_duration = ($match ['time_played'])/600;
+	
+	$result = array();
+	
+	if($match ['win'] == 1){
+		$result["win"] = 100;
+	} else {
+		$result["win"] = -75;
+	}		
+	
+	$result ["kills"]  = (($match ['kills'])*5)/$match_duration;
+	$result ["assists"]  = (($match ['assists'])*3)/$match_duration;
+	$result ["deaths"]  = (($match ['deaths'])*(-5))/$match_duration;
+	
+	$result ["minions"]  = ($match ['minions_killed'])/(20/$match_duration);
+	
+	$result ["damage_to_champions"]  = ($match ['total_damage_to_champions'])/(1000/$match_duration);
+	
+	$result ["ward_placed"]  = (($match ['ward_placed'])*2)/$match_duration;
+	$result ["ward_killed"]  = (($match ['ward_killed'])*2)/$match_duration;
+	
+	return $result;
+	
+}
+
 ?>

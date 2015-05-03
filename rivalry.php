@@ -15,30 +15,27 @@ $summoner_two = get_main_summoner ( $user_two_id );
 $matches_one = get_table_with_inner_join($config_match, $config_raw_match_stats, $config_match.".id = ".$config_raw_match_stats.".match_id and ".$config_raw_match_stats.".summoner_id = ".$summoner_one[0]['api_id']);
 $matches_two = get_table_with_inner_join($config_match, $config_raw_match_stats, $config_match.".id = ".$config_raw_match_stats.".match_id and ".$config_raw_match_stats.".summoner_id = ".$summoner_two[0]['api_id']);
 
-var_dump($matches_one);
-
 $user_one_points = 0;
 $user_two_points = 0;
 
+
 foreach ( $matches_one as $match ) {
 	if ($match ['date'] > $rivalry [0] ['start_date'] && $match ['date'] < $rivalry [0] ['end_date']) {
-		if ($match ['win'] == 1) {
-			$user_one_points ++;
-		} else {
-			$user_one_points --;
-		}
+		$result = get_match_points($match);
+		$user_one_points = $user_one_points + array_sum ($result);
 	}
 }
 
 foreach ( $matches_two as $match ) {
 	if ($match ['date'] > $rivalry [0] ['start_date'] && $match ['date'] < $rivalry [0] ['end_date']) {
-		if ($match ['win'] == 1) {
-			$user_two_points ++;
-		} else {
-			$user_two_points --;
-		}
+		$result = get_match_points($match);
+		$user_two_points = $user_two_points + array_sum ($result);
 	}
 }
+
+$user_one_points = round($user_one_points);
+$user_two_points = round($user_two_points);
+
 
 ?>
 
