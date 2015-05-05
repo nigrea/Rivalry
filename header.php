@@ -12,6 +12,7 @@
 		include 'config.php';
 		include 'func_lib.php';
 		include 'api_func_lib.php';
+		include 'html_generator.php';
 
 
 		
