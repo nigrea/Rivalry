@@ -92,13 +92,14 @@ function delete_row($table_name, $condition){
 
 function get_summoner($user_id){
 	include 'config.php';
-	$summoner = get_table($config_summoner, "user_id ='".$user_id."'");
+	$summoner = get_table($config_summoner, "user_id ='".$user_id."'");	
 	return $summoner;  //returns the summoner
 }
 
 function get_main_summoner($user_id){
 	include 'config.php';
 	$summoner = get_table($config_summoner, "user_id ='".$user_id."' AND main = 1");
+	$summoner[0]['name'] = ucfirst($summoner[0]['name']);
 	return $summoner;  //returns the summoner
 }
 

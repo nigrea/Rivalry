@@ -10,6 +10,20 @@ function html_match_generator($match, $result) {
 		$match_win_string = "False";
 	}
 
+	$type = "None";
+	
+	switch ($match['sub_type']) {
+		case "CAP_5x5":
+			$type = "Team Builder";
+			break;
+		case "RANKED_SOLO_5x5":
+			$type = "Ranked Solo";
+			break;
+		case "NORMAL":
+			$type = "Normal";
+			break;
+	}
+	
 	$duration = gmdate("H:i:s", $match['time_played']);
 
 	?>
@@ -17,7 +31,8 @@ function html_match_generator($match, $result) {
 	<div  class="panel-heading">
 		<h4 class="panel-title">
 			<a data-toggle="collapse" data-parent="#accordion"
-				href="#collapse<?php echo $match['id']?>"><h3><?php echo $champion[0]['name'].":      ".round ( $result['total'] )?></h3></a>
+				href="#collapse<?php echo $match['id']?>"><h3><img
+			src=<?php print $config_image_champ_square.$champion[0]['name'].".png"  ?> height="42" width="42">  <?php echo $champion[0]['name'].":      ".round ( $result['total'] )."  (". $type.")" ;?></h3></a>
 		</h4>
 	</div>
 	<div id="collapse<?php echo $match['id']?>"

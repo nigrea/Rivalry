@@ -31,7 +31,7 @@ if (isset ( $_POST ['accept'] )) {
 
 if (isset ( $_POST ['decline'] )) {
 	$id = $_GET ['id'];
-	delete_row($config_challange, 'id = "' . $id . '"');
+	delete_row ( $config_challange, 'id = "' . $id . '"' );
 }
 
 $received_challanges = get_table ( $config_challange, "user_two_id ='" . $id_one . "' AND accepted = 0" );
@@ -56,15 +56,23 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 
 	</div>
 
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+</div>
+
+<div class="row">
+
+	<div class="col-xs-6">
+		<div class="jumbotron">
+
+			<h2>Received Challanges</h2>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
 				<?php
 				foreach ( $received_challanges as $challange ) {
 					
@@ -76,34 +84,39 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 					
 					?>
 					<tr>
-					<td><?php print $user_one[0]['name']."   vs   ".$user_two[0]['name']; ?></td>
-					<td><form class="form-signin" role="form" method="post"
-							action="challange.php<?php print "?id=".$challange['id'];?>">
-							<button class="btn btn-lg btn-primary btn-block" type="submit"
-								name="accept">Accept</button>
-						</form></td>
-					<td><form class="form-signin" role="form" method="post"
-							action="challange.php<?php print "?id=".$challange['id'];?>">
-							<button class="btn btn-lg btn-primary btn-block" type="submit"
-								name="decline">Decline</button>
-						</form></td>
-				</tr>
+							<td><?php print $user_one[0]['name']."   vs   ".$user_two[0]['name']; ?></td>
+							<td><form class="form-signin" role="form" method="post"
+									action="challange.php<?php print "?id=".$challange['id'];?>">
+									<button class="btn btn-lg btn-primary btn-block" type="submit"
+										name="accept">Accept</button>
+								</form></td>
+							<td><form class="form-signin" role="form" method="post"
+									action="challange.php<?php print "?id=".$challange['id'];?>">
+									<button class="btn btn-lg btn-primary btn-block" type="submit"
+										name="decline">Decline</button>
+								</form></td>
+						</tr>
 					<?php
 				}
 				?>										
 			</tbody>
-		</table>
+				</table>
+			</div>
+		</div>
 	</div>
+	<div class="col-xs-6">
+		<div class="jumbotron">
 
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+			<h2>Active rivalrys</h2>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
 				<?php
 				foreach ( $rivalrys as $rivalry ) {
 					
@@ -115,28 +128,23 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 					
 					?>
 					<tr>
-					<td><?php print $user_one[0]['name']."   vs   ".$user_two[0]['name']; ?></td>
-					<td><form class="form-signin" role="form" method="post"
-							action="rivalry.php<?php print "?id=".$rivalry['id'];?>">
-							<button class="btn btn-lg btn-primary btn-block" type="submit"
-								name="accept">View</button>
-						</form></td>
-				</tr>
+							<td><?php print $user_one[0]['name']."   vs   ".$user_two[0]['name']; ?></td>
+							<td><form class="form-signin" role="form" method="post"
+									action="rivalry.php<?php print "?id=".$rivalry['id'];?>">
+									<button class="btn btn-lg btn-primary btn-block" type="submit"
+										name="accept">View</button>
+								</form></td>
+						</tr>
 					<?php
 				}
 				?>										
 			</tbody>
-		</table>
-	</div>
+				</table>
+			</div>
+		</div>
 
-	<div>
-		<h3>Received Challanges</h3>
-		<?php var_dump ( $received_challanges );?>
-		<h3>Send Challanges</h3>
-		<?php var_dump ( $send_challanges );?>
-		<h3>Rivalrys</h3>
-		<?php var_dump($rivalrys);?>
-	</div>
 
-</div>
+
+
+	</div>
 </div>

@@ -34,5 +34,6 @@ $config_api_champion = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/c
 // Asset urls
 
 $config_image_summoner_icon = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/profileicon/";
+$config_image_champ_square = "http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/";
 
 ?>
