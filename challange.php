@@ -1,9 +1,27 @@
+
 <?php
 include 'header.php';
 
 $id_one = $_SESSION ['user_id'];
 
-if (isset ( $_POST ['submit'] )) {
+if (isset ( $_POST ['submit'] )) {	
+	
+	$sub_types = implode ( ",", $_POST ['game_types'] );
+	
+	if($_POST['startDate'] != ""){
+		$start_time = strtotime($_POST['startDate']);
+	}else{
+		$start_time = strtotime(date ( 'Y-m-d H:i:s' ));
+	}
+	
+	if($_POST['endDate'] != ""){
+		$end_time = strtotime($_POST['endDate']);
+	}else{
+		$end_time = strtotime ( "+2 weeks" , $start_time);
+	}
+
+	$start_time = date('Y-m-d h:i:s',$start_time);
+	$end_time = date('Y-m-d h:i:s',$end_time);
 	
 	$summoner_name = $_POST ['leagueName'];
 	
@@ -11,7 +29,7 @@ if (isset ( $_POST ['submit'] )) {
 	
 	$id_two = $challanged_user [0] ['id'];
 	
-	add_row ( $config_challange, "user_one_id , user_two_id , accepted", "'$id_one','$id_two',0" );
+	add_row ( $config_challange, "user_one_id , user_two_id , accepted , sub_types , start_date , end_date", "'$id_one','$id_two',0,'$sub_types','$start_time','$end_time'" );
 	
 	header ( "Location: profile.php" );
 	die ( "Redirecting to: profile.php" );
@@ -23,10 +41,12 @@ if (isset ( $_POST ['accept'] )) {
 	$challange = get_challange ( $id );
 	$id_one = $challange [0] ['user_one_id'];
 	$id_two = $challange [0] ['user_two_id'];
-	$start_time = date ( 'Y-m-d H:i:s' );
-	$end_time = date ( 'Y-m-d H:i:s', strtotime ( "+2 weeks" ) );
+	$sub_types = $challange [0] ['sub_types'];
+	$start_time = $challange [0] ['start_date'];
+	$end_time = $challange [0] ['end_date'];
 	
-	add_row ( $config_rivalry, "user_one_id , user_two_id , start_date , end_date", "'$id_one','$id_two','$start_time','$end_time'" );
+	
+	add_row ( $config_rivalry, "user_one_id , user_two_id , start_date , end_date, sub_types", "'$id_one','$id_two','$start_time','$end_time', '$sub_types'" );
 }
 
 if (isset ( $_POST ['decline'] )) {
@@ -47,9 +67,27 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 		<form class="form-signin" role="form" method="post"
 			action="challange.php">
 			<h2 class="form-signin-heading">Challange someone!</h2>
-			<label for="leagueName" class="sr-only">Main League Account</label> <input
-				type="text" id="leagueName" name="leagueName" class="form-control"
-				placeholder="Main League Account" required autofocus>
+
+
+
+
+			<label class="checkbox-inline"> <input type="checkbox" value="NONE"
+				name='game_types[]'>Custom games
+			</label> <label class="checkbox-inline"> <input type="checkbox"
+				name='game_types[]' value="NORMAL">Normal
+			</label> <label class="checkbox-inline"> <input type="checkbox"
+				name='game_types[]' value="BOT">Coop vs AI
+			</label> <label class="checkbox-inline"> <input type="checkbox"
+				name='game_types[]' value="RANKED_SOLO_5x5">Ranked Solo Queue
+			</label><label class="checkbox-inline"> <input type="checkbox"
+				name='game_types[]' value="CAP_5x5">Team Builder
+			</label><label for="leagueName" class="sr-only">Main League Account</label>
+			<input type="text" id="leagueName" name="leagueName"
+				class="form-control" placeholder="Main League Account" required
+				autofocus> <input type="text" id="startDate" name="startDate"
+				class="form-control" placeholder="Start Date"> <input type="text"
+				id="endDate" name="endDate" class="form-control"
+				placeholder="End Date">
 			<button class="btn btn-lg btn-primary btn-block" type="submit"
 				name="submit">Challange</button>
 		</form>
@@ -148,3 +186,5 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 
 	</div>
 </div>
+
+

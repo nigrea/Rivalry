@@ -335,4 +335,28 @@ function make_calendar_xml($user_id){
         return 1;
 }
 
+function format_sub_type($sub_type){
+	$type = "None";
+	
+	switch ($sub_type) {
+		case "CAP_5x5" :
+			$type = "Team Builder";
+			break;
+		case "RANKED_SOLO_5x5" :
+			$type = "Ranked Solo";
+			break;
+		case "NORMAL" :
+			$type = "Normal";
+			break;
+		case "NONE" :
+			$type = "Custom game";
+			break;
+		case "BOT" :
+			$type = "Coop vs AI";
+			break;
+	}
+	
+	return $type;
+}
+
 ?>

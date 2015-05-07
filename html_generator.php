@@ -1,46 +1,38 @@
 <?php
-
 function html_match_generator($match, $result) {
 	include 'config.php';
 	$champion_id = $match ['champion_id'];
 	$champion = get_table ( $config_champion, "id = " . $champion_id . "" );
-	if($match ['win'] == 1){
+	if ($match ['win'] == 1) {
 		$match_win_string = "True";
-	}else{
+	} else {
 		$match_win_string = "False";
 	}
-
-	$type = "None";
 	
-	switch ($match['sub_type']) {
-		case "CAP_5x5":
-			$type = "Team Builder";
-			break;
-		case "RANKED_SOLO_5x5":
-			$type = "Ranked Solo";
-			break;
-		case "NORMAL":
-			$type = "Normal";
-			break;
-	}
+	$type = format_sub_type($match ['sub_type']);
 	
-	$duration = gmdate("H:i:s", $match['time_played']);
-
+	
+	
+	
+	$duration = gmdate ( "H:i:s", $match ['time_played'] );
+	
 	?>
 <div class="panel panel-default">
-	<div  class="panel-heading">
+	<div class="panel-heading">
 		<h4 class="panel-title">
 			<a data-toggle="collapse" data-parent="#accordion"
-				href="#collapse<?php echo $match['id']?>"><h3><img
-			src=<?php print $config_image_champ_square.$champion[0]['name'].".png"  ?> height="42" width="42">  <?php echo $champion[0]['name'].":      ".round ( $result['total'] )."  (". $type.")" ;?></h3></a>
+				href="#collapse<?php echo $match['id']?>"><h3>
+					<img
+						src=<?php print $config_image_champ_square.$champion[0]['name'].".png"?>
+						height="42" width="42">  <?php echo $champion[0]['name'].":      ".round ( $result['total'] )."  (". $type.")" ;?></h3></a>
 		</h4>
 	</div>
 	<div id="collapse<?php echo $match['id']?>"
 		class="panel-collapse collapse">
 		<div class="panel-body">
-		
-		<h3> Game Duration: <?php echo $duration;?></h3>
-		
+
+			<h3> Game Duration: <?php echo $duration;?></h3>
+
 			<table class="table table-striped">
 				<tr>
 					<th>Source</th>
@@ -73,7 +65,7 @@ function html_match_generator($match, $result) {
 					<td><?php echo round ( $result ['minions'] )?></td>
 				</tr>
 				<tr>
-					<td>Total Damage to	Champions</td>
+					<td>Total Damage to Champions</td>
 					<td><?php echo $match ['total_damage_to_champions']?></td>
 					<td><?php echo round ( $result ['damage_to_champions'] )?></td>
 				</tr>
@@ -95,11 +87,7 @@ function html_match_generator($match, $result) {
 
 <?php
 }
-
 function html_match_list_generator($match, $result) {
-	
-	
 }
-
 
 ?>
