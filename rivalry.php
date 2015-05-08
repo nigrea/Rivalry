@@ -8,7 +8,7 @@ $rivalry = get_rivalry ( $id );
 $user_one_id = $rivalry [0] ['user_one_id'];
 $user_two_id = $rivalry [0] ['user_two_id'];
 
-$sub_types = explode(",",$rivalry [0] ['sub_types']);
+$sub_types = explode ( ",", $rivalry [0] ['sub_types'] );
 
 if ($user_one_id != $_SESSION ['user_id'] && $user_two_id != $_SESSION ['user_id']) {
 	header ( "Location: profile.php" );
@@ -30,14 +30,11 @@ $user_two_points = 0;
 $user_one_count = 0;
 $user_two_count = 0;
 
-$formated_start_date = date ( 'd-m-Y' ,strtotime($rivalry [0] ['start_date']));
-$formated_end_date = date ( 'd-m-Y' ,strtotime($rivalry [0] ['end_date']));
+$formated_start_date = date ( 'd-m-Y', strtotime ( $rivalry [0] ['start_date'] ) );
+$formated_end_date = date ( 'd-m-Y', strtotime ( $rivalry [0] ['end_date'] ) );
 
 ?>
-<div class="jumbotron">
-<h2><?php echo "Start Date: ".$formated_start_date."  <br>  End Date: ".$formated_end_date?></h2>
-<br><h2>Game Types:  <?php foreach ($sub_types as $sub_type){echo " <br> ".format_sub_type($sub_type);}?></h2>
-</div>
+
 <div class="row">
 
 	<div class="col-xs-6">
@@ -66,7 +63,7 @@ $formated_end_date = date ( 'd-m-Y' ,strtotime($rivalry [0] ['end_date']));
 
 foreach ( $matches_one as $match ) {
 	if ($match ['date'] > $rivalry [0] ['start_date'] && $match ['date'] < $rivalry [0] ['end_date']) {
-		if (in_array ($match ['sub_type'],$sub_types) ) {
+		if (in_array ( $match ['sub_type'], $sub_types )) {
 			$result = get_match_points ( $match );
 			
 			html_match_generator ( $match, $result );
@@ -121,7 +118,7 @@ foreach ( $matches_one as $match ) {
 <?php
 foreach ( $matches_two as $match ) {
 	if ($match ['date'] > $rivalry [0] ['start_date'] && $match ['date'] < $rivalry [0] ['end_date']) {
-		if (in_array ($match ['sub_type'],$sub_types)) {
+		if (in_array ( $match ['sub_type'], $sub_types )) {
 			$result = get_match_points ( $match );
 			
 			html_match_generator ( $match, $result );
@@ -150,6 +147,18 @@ foreach ( $matches_two as $match ) {
 
 			</div>
 		</div>
+	</div>
+</div>
+<div class="jumbotron">
+	<div class="container">
+		<row>
+		<div class="col-xs-6">
+			<h2><?php echo "Start Date: ".$formated_start_date."  <br>  End Date: ".$formated_end_date?></h2>
+		</div>
+		<div class="col-xs-6">
+			<h2>Game Types:  <?php foreach ($sub_types as $sub_type){echo " <br> ".format_sub_type($sub_type);}?></h2>
+		</div>
+		</row>
 	</div>
 </div>
 </div>

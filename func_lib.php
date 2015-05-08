@@ -359,4 +359,10 @@ function format_sub_type($sub_type){
 	return $type;
 }
 
+function validateDate($date)
+{
+	$d = DateTime::createFromFormat('d-m-Y', $date);
+	return $d && $d->format('d-m-Y') == $date;
+}
+
 ?>

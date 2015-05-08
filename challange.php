@@ -4,24 +4,38 @@ include 'header.php';
 
 $id_one = $_SESSION ['user_id'];
 
-if (isset ( $_POST ['submit'] )) {	
+if (isset ( $_POST ['submit'] )) {
 	
-	$sub_types = implode ( ",", $_POST ['game_types'] );
-	
-	if($_POST['startDate'] != ""){
-		$start_time = strtotime($_POST['startDate']);
-	}else{
-		$start_time = strtotime(date ( 'Y-m-d H:i:s' ));
+	if (! empty ( $_POST ['game_types'] )) {
+		$sub_types = implode ( ",", $_POST ['game_types'] );
+	} else {
+		$sub_types = "NONE,NORMAL,BOT,RANKED_SOLO_5x5,CAP_5x5";
 	}
 	
-	if($_POST['endDate'] != ""){
-		$end_time = strtotime($_POST['endDate']);
-	}else{
-		$end_time = strtotime ( "+2 weeks" , $start_time);
+	if ($_POST ['startDate'] != "") {
+		if (validateDate ( $_POST ['startDate'] )) {
+			$start_time = strtotime ( $_POST ['startDate'] );
+		} else {
+			echo "Not viable date format!! Start Date is set to current date";
+			$start_time = strtotime ( $_POST ['startDate'] );
+		}
+	} else {
+		$start_time = strtotime ( date ( 'Y-m-d H:i:s' ) );
 	}
-
-	$start_time = date('Y-m-d h:i:s',$start_time);
-	$end_time = date('Y-m-d h:i:s',$end_time);
+	
+	if ($_POST ['endDate'] != "") {
+		if (validateDate ( $_POST ['startDate'] )) {
+			$end_time = strtotime ( $_POST ['endDate'] );
+		} else {
+			echo "Not viable date format!! End Date is set to two weeks from current date";
+			$end_time = strtotime ( "+2 weeks", $start_time );
+		}
+	} else {
+		$end_time = strtotime ( "+2 weeks", $start_time );
+	}
+	
+	$start_time = date ( 'Y-m-d h:i:s', $start_time );
+	$end_time = date ( 'Y-m-d h:i:s', $end_time );
 	
 	$summoner_name = $_POST ['leagueName'];
 	
@@ -45,7 +59,6 @@ if (isset ( $_POST ['accept'] )) {
 	$start_time = $challange [0] ['start_date'];
 	$end_time = $challange [0] ['end_date'];
 	
-	
 	add_row ( $config_rivalry, "user_one_id , user_two_id , start_date , end_date, sub_types", "'$id_one','$id_two','$start_time','$end_time', '$sub_types'" );
 }
 
@@ -63,14 +76,9 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 <div class="jumbotron">
 
 	<div class="container">
-
 		<form class="form-signin" role="form" method="post"
 			action="challange.php">
 			<h2 class="form-signin-heading">Challange someone!</h2>
-
-
-
-
 			<label class="checkbox-inline"> <input type="checkbox" value="NONE"
 				name='game_types[]'>Custom games
 			</label> <label class="checkbox-inline"> <input type="checkbox"
@@ -81,15 +89,28 @@ $rivalrys = array_merge ( get_table ( $config_rivalry, "user_one_id ='" . $id_on
 				name='game_types[]' value="RANKED_SOLO_5x5">Ranked Solo Queue
 			</label><label class="checkbox-inline"> <input type="checkbox"
 				name='game_types[]' value="CAP_5x5">Team Builder
-			</label><label for="leagueName" class="sr-only">Main League Account</label>
-			<input type="text" id="leagueName" name="leagueName"
-				class="form-control" placeholder="Main League Account" required
-				autofocus> <input type="text" id="startDate" name="startDate"
-				class="form-control" placeholder="Start Date"> <input type="text"
-				id="endDate" name="endDate" class="form-control"
-				placeholder="End Date">
-			<button class="btn btn-lg btn-primary btn-block" type="submit"
-				name="submit">Challange</button>
+			</label>
+			<div class="row">
+
+				<div class="col-xs-6">
+					<label for="leagueName" class="sr-only">Main League Account</label>
+					<input type="text" id="leagueName" name="leagueName"
+						class="form-control" placeholder="Main League Account" required
+						autofocus>
+					<button class="btn btn-lg btn-primary btn-block" type="submit"
+						name="submit">Challange</button>
+				</div>
+				<div class="col-xs-6">
+					<input type="text" id="startDate" name="startDate"
+						class="form-control" placeholder="Start Date: d-m-Y"> <input
+						type="text" id="endDate" name="endDate" class="form-control"
+						placeholder="End Date: d-m-Y">
+				</div>
+
+
+
+			</div>
+
 		</form>
 
 	</div>
