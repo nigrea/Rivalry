@@ -14,12 +14,13 @@ if (isset ( $_POST ['submit'] )) {
 	$email = $_POST ['inputEmail'];
 	$password = $_POST ['inputPassword'];
 	$leagueName = $_POST ['leagueName'];
+	$safe_password = md5($password.$config_salt);
 	
-	add_row ( $config_user, "email, password", "'$email','$password'" );
+	add_row ( $config_user, "email, password", "'$email','$safe_password'" );
 	
-	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$password'" );
+	$login_arr = get_table ( $config_user, "email = '$email' AND password = '$safe_password'" );
 	
-	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $password) {
+	if (@$login_arr [0] ['email'] == $email && @$login_arr [0] ['password'] == $safe_password) {
 		$user_id = $login_arr [0] ['id'];
 		
 		$_SESSION ['user_id'] = $user_id;
